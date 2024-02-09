@@ -19,7 +19,7 @@
                 <div class="logo">
                     <h2>Welcome to your TO-DO App!</h2>
                     <div class="add-note">
-                        <button type="button" id="createToDo" class="create-button">Create To-do items</button>
+                        <button type="button" id="createToDo" class="create-button">Create to-do items</button>
                     </div>
                 </div>
                 <div class="search">
@@ -33,24 +33,25 @@
             <div class="notes" id="fullPageDisplay">
 
                 <div class="left-scroll-div" id="halfDisplay">
-                    <div class="title-para-div" id="titleParaDiv" tabindex="0">
-                        <div class="title-div">
+                    <!-- <div class="title-para-div" id="titleParaDiv" tabindex="0">
+                        <div class="date-div">
                             <h4>07-02-2024</h4>
                             <i class="fa fa-trash"></i>
                         </div>
                         <div class="title-div">
                             <h4>Add New Title</h4>
-                            <select name="task-status" id="status">
-                                <option value="In progress">In progress</option>
-                                <option value="Pending">Pending</option>
-                                <option value="Completed">Completed</option>
+                            <select name="task-status" id="status" class="status">
+                                <option value="In progress" class="inprogress">In progress</option>
+                                <option value="Pending" class="pending">Pending</option>
+                                <option value="Completed" class="completed">Completed</option>
                             </select>
                         </div>
                         <div class="para-div">
                             <p>This is the section for housing everything i want to write in my note app.this is the
                                 section for housing everything i want to write in my note app</p>
                         </div>
-                    </div>
+                    </div> -->
+                    <!-- <p class="not-found-hide" id="notFound">Item Not Found</p> -->
 
                 </div>
 
@@ -76,11 +77,13 @@
                         <div class="close-icon-div">
                             <i class="fa fa-xmark" id="closeIcon"></i>
                         </div>
+                        <label for="displayDate" class="display-label">Enter Date</label>
+                        <input value="" class="date-input" id="displayDate" type="date" />
                         <label for="displayTitle" class="display-label">Enter Title</label>
-                        <textarea value="" class="display-title-div" id="displayTitle" type="text"></textarea>
-                        <label for="paraText" class="display-para">Write Note Here</label>
-                        <textarea value="" class="display-para-div" type="text" id="paraText"></textarea>
-                        <button type="submit" class="button">Add Note</button>
+                        <textarea value="" class="display-title-div" id="displayTitle"></textarea>
+                        <label for="paraText" class="display-para">Write Notes Here</label>
+                        <textarea value="" class="display-para-div" id="paraText"></textarea>
+                        <button type="submit" class="button">Add to-do items</button>
                     </form>
                 </div>
 
@@ -90,7 +93,7 @@
     </div>
 
 
-    <!-- <script src="./index.js"></script> -->
+    <script src="./index.js"></script>
 </body>
 
 </html>
