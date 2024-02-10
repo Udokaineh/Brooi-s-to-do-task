@@ -218,6 +218,7 @@ body {
 }
 
 .title-div h4 {
+    width: 68%;
     color: white;
     font-size: 14px;
     overflow: hidden;
@@ -299,7 +300,7 @@ body {
     display: flex;
 }
 
-.status:hover .trick-three{
+.status:hover .trick-three {
     position: absolute;
     background-color: #e3e3e3;
     padding: 2px;
@@ -375,21 +376,21 @@ li {
 /* start of right display */
 
 .dummy-display {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     text-align: center;
-    width: 70%;
     margin: 3rem auto;
 }
 
 .dummy-display h2 {
-    max-width: 520px;
-    width: 520px;
+    max-width: 500px;
+    width: 500px;
     color: white;
 }
 
 .dummy-display-hide {
-    text-align: center;
-    width: 70%;
-    margin: 3rem auto;
     display: none;
 }
 
@@ -398,6 +399,7 @@ li {
     order: 2;
     overflow: auto;
     max-height: 400px;
+    border-radius: 4px;
 }
 
 .right-scroll {
@@ -412,7 +414,7 @@ li {
 .right-display-div {
     width: 100%;
     height: auto;
-    padding: 0 0.5rem 0 1rem;
+    padding: 0.5rem 0.5rem 0 1rem;
     line-height: 125%;
     display: flex;
     flex-direction: column;
@@ -446,6 +448,7 @@ li {
     color: white;
     font-size: 16px;
     font-weight: 800;
+    width: 90%;
 }
 
 .fa-pen {
@@ -465,6 +468,8 @@ li {
     padding: 1rem;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
 }
 
 .display-form-hide {
@@ -474,9 +479,8 @@ li {
 }
 
 .close-icon-div {
-    width: 97%;
+    width: 100%;
     font-size: 24px;
-    margin: 0 1rem;
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -493,20 +497,23 @@ li {
 }
 
 .date-input {
-    margin: 0.25rem 1rem 1rem;
     padding: 0.5rem 0.25rem;
     border-radius: 8px;
     border: none;
     border: 1px solid black;
-    width: 97%;
+    width: 100%;
     height: auto;
     font-weight: bold;
     font-size: 14px;
+    margin-bottom: 8px;
+    transition: outline 1s ease-in;
+}
+.date-input:focus {
+    outline: 1px solid greenyellow;
 }
 
 .display-label {
-    margin-left: 0.5rem;
-    padding: 0 0.5rem;
+    padding: 4px 0;
     color: white;
     font-size: 14px;
 }
@@ -514,21 +521,24 @@ li {
 .display-title-div {
     resize: none;
     overflow: hidden;
-    margin: 0.25rem 1rem 1rem;
+    margin-bottom: 8px;
     padding: 0 0.25rem;
     border-radius: 8px;
     border: none;
     border: 1px solid black;
-    width: 97%;
+    width: 100%;
     height: auto;
     font-weight: bold;
     font-size: 14px;
+    transition: outline 1s ease-in;
+}
+.display-title-div:focus {
+    outline: 1px solid greenyellow;
 }
 
 .display-para {
     color: white;
-    margin-left: 0.5rem;
-    padding: 0 0.5rem;
+    padding: 4px 0;
     font-size: 14px;
 }
 
@@ -539,18 +549,21 @@ li {
     border: none;
     padding: 0 0.25rem 2rem;
     border: 1px solid black;
-    margin: 0.25rem 1rem 1rem;
-    width: 97%;
+    margin-bottom: 24px;
+    width: 100%;
     height: auto;
+    transition: outline 1s ease-in;
+}
+.display-para-div:focus {
+    outline: 1px solid greenyellow;
 }
 
 .button {
     padding: 12px 0;
     outline: none;
     border: none;
-    margin: 0.75rem 1rem 1rem;
     border-radius: 8px;
-    width: 97%;
+    width: 100%;
     cursor: pointer;
     color: #161616;
     background-color: greenyellow;
@@ -559,8 +572,7 @@ li {
 .button:hover {
     padding: 10px 0;
     border: 2px solid black;
-    margin: 0.75rem 1rem 1rem;
-    width: 97%;
+    width: 100%;
     cursor: pointer;
     background: radial-gradient(circle, rgb(173, 255, 47) 0%, rgba(7, 8, 8, 1) 100%);
     color: #161616;
@@ -581,6 +593,11 @@ li {
     .left-scroll-div {
         width: 70%;
     }
+
+    .title-div h4 {
+        width: 64%;
+    }
+
 
     .dummy-display h2 {
         max-width: 290px;
@@ -629,13 +646,17 @@ li {
     }
 
     .left-scroll-div {
-        width: 80%;
+        width: 82%;
+    }
+
+    .title-div h4 {
+        width: 54%;
     }
 
     .dummy-display h2 {
-        max-width: 180px;
-        width: 180px;
-        font-size: 16px;
+        max-width: 240px;
+        width: 240px;
+        font-size: 14px;
     }
 
     .status {
@@ -661,47 +682,80 @@ li {
         display: none;
     }
 
+    .notes {
+        width: 100%;
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: space-between;
+        background-color: #070808;
+        height: auto;
+        row-gap: 2rem;
+        padding: 12px;
+        border-radius: 1rem;
+    }
+
+    .left-scroll-div {
+        width: 100%;
+    }
+
+    ::-webkit-scrollbar {
+        width: 0px;
+    }
+
     .dummy-display h2 {
-        max-width: 150px;
-        width: 150px;
+        max-width: 100%;
         font-size: 14px;
     }
 
-    .title-para-div {
-        padding: 4px;
+    .display-and-form-div {
+        background-color: #161616;
+
+        .title-para-div {
+            padding: 4px;
+            border-radius: 8px;
+        }
+
+        .title-para-div:hover {
+            padding: 4px;
+            border-radius: 8px;
+        }
+
+        .title-para-div:focus {
+            padding: 4px;
+            border-radius: 8px;
+        }
+
+        .title-div {
+            display: flex;
+            flex-direction: column-reverse;
+            align-items: flex-start;
+            justify-content: flex-start;
+            row-gap: 12px;
+        }
+
+        .title-div h4 {
+            width: 100%;
+
+        }
+
+        .status {
+            padding: 4px 6px;
+        }
+
+        .right-display-div {
+            padding: 0 0 0 8px;
+        }
+
     }
-
-    .title-div {
-        display: flex;
-        flex-direction: column-reverse;
-        align-items: flex-start;
-        justify-content: flex-start;
-        row-gap: 12px;
-
-    }
-
-    .title-div h4 {
-        width: 100%;
-
-    }
-
-    .status {
-        padding: 4px 6px;
-    }
-
-    .right-display-div {
-        padding: 0 0 0 8px;
-    }
-
 }
 
-@media(max-width: 430px) {
+@media(max-width: 280px) {
     .header-container {
         padding: 0.5rem;
     }
 
     .notes-header {
-        padding: 1=0.5rem;
+        padding: 0.5rem;
     }
 
     .logo h2 {
@@ -709,8 +763,17 @@ li {
         font-size: 14px;
     }
 
+    .title-div ul {
+        width: 60%;
+    }
+
     .status {
-        padding: 1px;
-        font-size: 8px;
+        padding: 1px 2px;
+        font-size: 12px;
+    }
+
+    .status:hover .status-option {
+        top: 18px;
+        font-size: 12px;
     }
 }
