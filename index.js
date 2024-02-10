@@ -39,11 +39,12 @@ closeIcon.addEventListener("click", close)
 let userArray = []
 
 function fetchUserData() {
-  if (localStorage.getItem("userData")) {
-    userArray = JSON.parse(localStorage.getItem("userData"))
-  }
-  printDataOnUI()
-
+  document.addEventListener("DOMContentLoaded", () => {
+    if (localStorage.getItem("userData")) {
+      userArray = JSON.parse(localStorage.getItem("userData"))
+    }
+    printDataOnUI();
+  })
 }
 fetchUserData()
 
@@ -72,9 +73,10 @@ function printNotFoundOnUI() {
   const notFoundParagraph = document.createElement("p");
   notFoundParagraph.classList.add("not-found")
   notFoundParagraph.textContent = "Item not found";
-  
+
   leftDisplay.appendChild(notFoundParagraph);
 }
+
 
 // userArray is then changed to filterArray just cos of the handleSearch function above
 function printDataOnUI(filteredArray = userArray) {
@@ -101,7 +103,8 @@ function printDataOnUI(filteredArray = userArray) {
 
     let trashIcon = document.createElement("i")
     trashIcon.classList.add("fa", "fa-trash")
-    trashIcon.addEventListener("click", function () {
+    trashIcon.addEventListener("click", function (event) {
+      event.stopPropagation();
       deleteItem(index);
     })
 
@@ -111,25 +114,43 @@ function printDataOnUI(filteredArray = userArray) {
     let titleheading = document.createElement("h4")
     titleheading.textContent = titleText
 
-    let select = document.createElement("select")
-    select.setAttribute("name", "task-status")
-    select.setAttribute("id", "status")
-    select.classList.add("status")
+    let statusUl = document.createElement("ul")
 
-    let optionOne = document.createElement("option")
-    optionOne.setAttribute("value", "In progress")
+
+    let defaultLi = document.createElement("li")
+    defaultLi.classList.add("status")
+    defaultLi.textContent = "Task status"
+    let taskId = "task-" + index // Dynamically assign a unique identifier to persist status
+    defaultLi.setAttribute("id", taskId)
+    console.log(taskId)
+
+    let caretDown = document.createElement("i")
+    caretDown.classList.add("fa", "fa-caret-down")
+
+    let nestedUl = document.createElement("ul")
+    nestedUl.classList.add("status-option")
+
+    let optionOne = document.createElement("li")
     optionOne.classList.add("inprogress")
     optionOne.textContent = "In progress"
+    optionOne.addEventListener("click", function () {
+      updateStatusOne(defaultLi)
+    })
 
-    let optionTwo = document.createElement("option")
-    optionTwo.setAttribute("value", "Pending")
+    let optionTwo = document.createElement("li")
     optionTwo.classList.add("pending")
     optionTwo.textContent = "Pending"
+    optionTwo.addEventListener("click", function () {
+      updateStatusTwo(defaultLi)
+    })
 
-    let optionThree = document.createElement("option")
-    optionThree.setAttribute("value", "Completed")
+
+    let optionThree = document.createElement("li")
     optionThree.classList.add("completed")
     optionThree.textContent = "Completed"
+    optionThree.addEventListener("click", function () {
+      updateStatusThree(defaultLi)
+    })
 
     let paraDiv = document.createElement("div")
     paraDiv.classList.add("para-div")
@@ -137,12 +158,29 @@ function printDataOnUI(filteredArray = userArray) {
     let paraText = document.createElement("p")
     paraText.textContent = paragraph
 
+
     paraDiv.append(paraText)
-    select.append(optionOne, optionTwo, optionThree)
-    titleDiv.append(titleheading, select)
+    nestedUl.append(optionOne, optionTwo, optionThree)
+    defaultLi.append(caretDown)
+    defaultLi.append(nestedUl)
+    statusUl.append(defaultLi)
+    titleDiv.append(titleheading, statusUl)
     dateDiv.append(dateheading, trashIcon)
     titleAndParaDiv.append(dateDiv, titleDiv, paraDiv)
     leftDisplay.append(titleAndParaDiv)
+
+    // Retrieve stored status from LocalStorage
+    let storedStatus = localStorage.getItem(taskId)
+    if (storedStatus) {
+      defaultLi.textContent = ""
+      if (storedStatus === "inprogress") {
+        updateStatusOne(defaultLi)
+      } else if (storedStatus === "pending") {
+        updateStatusTwo(defaultLi)
+      } else if (storedStatus === "completed") {
+        updateStatusThree(defaultLi)
+      }
+    }
 
     let rightDisplayDiv = document.createElement("div")
     rightDisplayDiv.classList.add("right-display-div")
@@ -195,6 +233,8 @@ function displaySelected(index) {
   let rightTitle = document.createElement("h3")
   rightTitle.classList.add("right-display-title")
   rightTitle.textContent = selectedData.titleValue
+
+
 
   let editIcon = document.createElement("i")
   editIcon.classList.add("fa", "fa-pen")
@@ -258,6 +298,110 @@ function editText(index) {
   paraText.value = selectedText.paraValue
   deleteItem(index)
 }
+
+// function to update task status, I passed the defaultLi as a parameter to have access to it outside the printonui function
+
+function updateStatusOne(defaultLi) {
+  defaultLi.classList.remove("pending", "completed")
+  defaultLi.classList.add("status", "inprogress")
+  defaultLi.textContent = "In progress"
+  defaultLi.style.padding = "2px"
+
+  localStorage.setItem(defaultLi.id, "inprogress")
+
+  let caretDown = document.createElement("i")
+  caretDown.classList.add("fa", "fa-caret-down")
+
+  let optionTwo = document.createElement("li")
+  optionTwo.classList.add("pending")
+  optionTwo.textContent = "Pending"
+  optionTwo.addEventListener("click", function () {
+    updateStatusTwo(defaultLi);
+  });
+
+  let optionThree = document.createElement("li")
+  optionThree.classList.add("completed")
+  optionThree.textContent = "Completed"
+  optionThree.addEventListener("click", function () {
+    updateStatusThree(defaultLi);
+  });
+
+  let trickOne = document.createElement("ul")
+  trickOne.classList.add("trick-one")
+
+  trickOne.append(optionTwo, optionThree)
+  defaultLi.append(caretDown)
+  defaultLi.append(trickOne)
+}
+
+function updateStatusTwo(defaultLi) {
+  defaultLi.classList.remove("inprogress", "completed")
+  defaultLi.classList.add("status", "pending")
+  defaultLi.textContent = "Pending"
+  defaultLi.style.paddingRight = "8px"
+  defaultLi.style.paddingLeft = "8px"
+  defaultLi.style.paddingBottom = "2px"
+
+  localStorage.setItem(defaultLi.id, "pending")
+
+  let caretDown = document.createElement("i")
+  caretDown.classList.add("fa", "fa-caret-down")
+
+  let optionOne = document.createElement("li")
+  optionOne.classList.add("inprogress")
+  optionOne.textContent = "In progress"
+  optionOne.addEventListener("click", function () {
+    updateStatusOne(defaultLi);
+  });
+
+  let optionThree = document.createElement("li")
+  optionThree.classList.add("completed")
+  optionThree.textContent = "Completed"
+  optionThree.addEventListener("click", function () {
+    updateStatusThree(defaultLi);
+  });
+
+  let trickTwo = document.createElement("ul")
+  trickTwo.classList.add("trick-two")
+
+  trickTwo.append(optionOne, optionThree)
+  defaultLi.append(caretDown)
+  defaultLi.append(trickTwo)
+}
+function updateStatusThree(defaultLi) {
+  defaultLi.classList.remove("inprogress", "pending")
+  defaultLi.classList.add("status", "completed")
+  defaultLi.textContent = "Completed"
+  defaultLi.style.padding = "2px"
+
+  localStorage.setItem(defaultLi.id, "completed")
+
+  let caretDown = document.createElement("i")
+  caretDown.classList.add("fa", "fa-caret-down")
+
+  let optionOne = document.createElement("li")
+  optionOne.classList.add("inprogress")
+  optionOne.textContent = "In progress"
+  optionOne.addEventListener("click", function () {
+    updateStatusOne(defaultLi);
+  });
+
+  let optionTwo = document.createElement("li")
+  optionTwo.classList.add("pending")
+  optionTwo.textContent = "Pending"
+  optionTwo.addEventListener("click", function () {
+    updateStatusTwo(defaultLi);
+  });
+
+  let trickThree = document.createElement("ul")
+  trickThree.classList.add("trick-three")
+
+  trickThree.append(optionOne, optionTwo)
+  defaultLi.append(caretDown)
+  defaultLi.append(trickThree)
+}
+
+
 
 
 // an event listener of submit on the form, hide form, followed by reveal right scroll is activated. 
