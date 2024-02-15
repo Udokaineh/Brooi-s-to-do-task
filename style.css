@@ -24,7 +24,7 @@ body {
 }
 
 .header-container {
-    background-color: #2c2c2c;
+    background-color: #393939;
     padding: 2.5rem;
     height: auto;
     border-radius: 1rem;
@@ -144,7 +144,7 @@ body {
 
 /* left scroll section */
 .to-do-container {
-    background-color: #2c2c2c;
+    background-color: #393939;
     padding: 2.5rem;
     height: auto;
     border-radius: 1rem;
