@@ -39,14 +39,20 @@ closeIcon.addEventListener("click", close)
 let userArray = []
 
 function fetchUserData() {
-  document.addEventListener("DOMContentLoaded", () => {
-    if (localStorage.getItem("userData")) {
-      userArray = JSON.parse(localStorage.getItem("userData"))
+  // document.addEventListener("DOMContentLoaded", () => {
+  if (localStorage.getItem("userData")) {
+    userArray = JSON.parse(localStorage.getItem("userData"));
+    if (userArray.length === 0) {
+      printNotFoundOnUI();
+    } else {
+      printDataOnUI();
     }
-    printDataOnUI();
-  })
+  } else {
+    printNotFoundOnUI();
+  }
 }
-fetchUserData()
+fetchUserData();
+
 
 // event listener for the search input
 search.addEventListener("input", handleSearch)
@@ -122,7 +128,6 @@ function printDataOnUI(filteredArray = userArray) {
     defaultLi.textContent = "Task status"
     let taskId = "task-" + index // Dynamically assign a unique identifier to persist status
     defaultLi.setAttribute("id", taskId)
-    console.log(taskId)
 
     let caretDown = document.createElement("i")
     caretDown.classList.add("fa", "fa-caret-down")
@@ -192,7 +197,7 @@ function printDataOnUI(filteredArray = userArray) {
     let rightTitle = document.createElement("h3")
     rightTitle.classList.add("right-display-title")
     rightTitle.setAttribute("id", "rightDisplayTitle")
-    rightTitle.textContent = titleText
+    rightTitle.textContent = userArray[0].titleValue
 
     let editIcon = document.createElement("i")
     editIcon.classList.add("fa", "fa-pen")
@@ -203,7 +208,7 @@ function printDataOnUI(filteredArray = userArray) {
     let rightPara = document.createElement("p")
     rightPara.classList.add("right-display-para")
     rightPara.setAttribute("id", "rightDisplayPara")
-    rightPara.textContent = paragraph
+    rightPara.textContent = userArray[0].paraValue
 
 
     titleEdit.append(rightTitle, editIcon)
@@ -225,7 +230,6 @@ function displaySelected(index) {
   let rightDisplayDiv = document.createElement("div")
   rightDisplayDiv.classList.add("right-display-div")
   rightDisplayDiv.setAttribute("id", "rightDisplayDiv")
-  // rightDisplayDiv.addEventListener("dblclick", editRightDisplayDiv)
 
   let titleEdit = document.createElement("div")
   titleEdit.classList.add("title-edit-div")
@@ -425,7 +429,10 @@ function collectData(event) {
   }
 
   userArray.unshift(userObject)
+  let recentItem = userArray[0]
   localStorage.setItem("userData", JSON.stringify(userArray))
+  console.log("inside", userArray)
+  console.log("recent", recentItem)
   fetchUserData()
   printDataOnUI()
 

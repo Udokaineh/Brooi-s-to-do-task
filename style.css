@@ -94,7 +94,7 @@ body {
     border: none;
     border-radius: 0.5rem;
     border: 1px solid #e3e3e3;
-    transition: border-radius 0.2s ease-in-out;
+    transition: border 0.2s ease-in-out;
 }
 
 .search input:focus {
@@ -333,8 +333,8 @@ li {
     padding: 1px 2px;
     border-radius: 24px;
     font-size: 12px;
-    color: rgb(184, 119, 33);
-    background-color: rgb(244, 219, 187);
+    color: #b87721;
+    background-color: #f4dbbb;
 }
 
 .pending {
@@ -342,8 +342,8 @@ li {
     padding: 1px 2px;
     border-radius: 24px;
     font-size: 12px;
-    color: rgb(80, 80, 80);
-    background-color: rgb(202, 202, 202);
+    color: #505050;
+    background-color: #cacaca;
 }
 
 .completed {
@@ -351,8 +351,8 @@ li {
     padding: 1px 2px;
     border-radius: 24px;
     font-size: 12px;
-    color: rgb(0, 105, 0);
-    background-color: greenyellow;
+    color: #006900;
+    background-color: #adff2f;
 }
 
 .para-div {
